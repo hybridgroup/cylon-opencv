@@ -8,8 +8,6 @@
 
 'use strict'
 
-#require './cylon-opencv'
-
 namespace = require 'node-namespace'
 
 namespace "Cylon.Drivers.OpenCV", ->

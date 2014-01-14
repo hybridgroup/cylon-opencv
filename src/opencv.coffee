@@ -8,7 +8,6 @@
 
 'use strict'
 
-#require './cylon-opencv'
 LibOpenCV = require 'opencv'
 namespace = require 'node-namespace'
 
