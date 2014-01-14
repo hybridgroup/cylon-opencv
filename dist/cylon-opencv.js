@@ -9,25 +9,36 @@
 
 (function() {
   'use strict';
-  var namespace,
-    __slice = [].slice;
+  var namespace;
 
   namespace = require('node-namespace');
 
   require('cylon');
 
+  require('./opencv');
+
+  require('./camera');
+
+  require('./window');
+
   module.exports = {
-    adaptor: function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return function() {};
+    adaptor: function(opts) {
+      return new Cylon.Adaptors.OpenCV(opts);
     },
-    driver: function() {
-      var args;
-      args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      return function() {};
+    driver: function(opts) {
+      if (opts.name === 'camera') {
+        return new Cylon.Drivers.OpenCV.Camera(opts);
+      } else if (opts.name === 'window') {
+        return new Cylon.Drivers.OpenCV.Window(opts);
+      } else {
+        return null;
+      }
     },
-    register: function(robot) {}
+    register: function(robot) {
+      robot.registerAdaptor('cylon-opencv', 'opencv');
+      robot.registerDriver('cylon-opencv', 'camera');
+      return robot.registerDriver('cylon-opencv', 'window');
+    }
   };
 
 }).call(this);

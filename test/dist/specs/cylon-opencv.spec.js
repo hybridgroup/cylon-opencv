@@ -4,7 +4,7 @@
 
   module = source("cylon-opencv");
 
-  describe("basic tests", function() {
+  describe("cylon-opencv", function() {
     it("standard async test", function(done) {
       var bool;
       bool = false;

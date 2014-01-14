@@ -13,36 +13,36 @@
 namespace = require 'node-namespace'
 
 namespace "Cylon.Drivers.OpenCV", ->
-  class @OpenCV extends Cylon.Driver
+  class @Camera extends Cylon.Driver
 
     constructor: (opts) ->
       super
-      @device = opts.device
-      @connection = @device.connection
-      @cameraId = opts.cameraId
-      @cameraName = if opts.name? then opts.name else "camera#{cameraId}"
+      @cameraId = opts.extraParams.camera
       @displayingVideo = false
+      @haarcascade = opts.extraParams.haarcascade
       #@proxyMethods @commands, @connection, this
 
     commands: ->
       ['readFrame', 'detectFaces', 'displayVideo']
 
     start: (callback) ->
-      Logger.debug "Camera started"
-      @connection.initCamera(@cameraId, callback)
-      @defineDriverEvent eventName: 'frameReady'
-      @defineDriverEvent eventName: 'facesDetected'
-      @device.emit 'cameraStarted'
+      @defineDriverEvent eventName: 'cameraReady', sendUpdate: false
+      @defineDriverEvent eventName: 'frameReady', sendUpdate: false
+      @defineDriverEvent eventName: 'facesDetected', sendUpdate: false
+      @connection.initCamera(@cameraId, @haar)
+      super
 
-    displayVideo: (fps, windowName = null) ->
-      delay = Math.round(1000 / fps)
-      windowName ?= @cameraName
-      every(delay, () =>
-        @connection.on('frameReady', (err, frame) =>
-          @connection.showFrame(windowName, frame, delay)
-        )
-      )
+    #displayVideo: (fps, windowName = null) ->
+      #delay = Math.round(1000 / fps)
+      #windowName ?= @cameraName
+      #every(delay, () =>
+        #@connection.on('frameReady', (err, frame) =>
+          #@connection.showFrame(windowName, frame, delay)
+        #)
+      #)
 
-    readFrame: (callback) ->
+    readFrame: () ->
       @connection.readFrame(@cameraId)
 
+    detectFaces: (frame) ->
+      @connection.detectFaces(frame, @haarcascade)

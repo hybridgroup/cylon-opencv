@@ -9,7 +9,7 @@
 'use strict'
 
 #require './cylon-opencv'
-OpenCV = require 'opencv'
+LibOpenCV = require 'opencv'
 namespace = require 'node-namespace'
 
 namespace "Cylon.Adaptors", ->
@@ -20,48 +20,46 @@ namespace "Cylon.Adaptors", ->
       @windows = {}
 
     commands: ->
-      ['readFrame', 'cameraFeed', 'detectFace', 'openWindow']
+      ['readFrame', 'initCamera', 'detectFaces', 'createWindow', 'showFrame']
 
     connect: (callback) ->
-      @board = new LibFirmata.Board @connection.port.toString(), =>
-        (callback)(null)
-        @connection.emit 'connect'
-
-      @proxyMethods @commands, @board, @myself
+      super
 
     disconnect: ->
-      Logger.debug "Disconnecting from board '#{@name}'..."
-      @board.reset()
+      Logger.debug "Disconnecting from opencv '#{@name}'..."
+      #@board.reset()
 
-    initCamera: (cameraId, callback) ->
-      @cameras[cameraId] = OpenCV.VideoCapture(cameraId) unless @cameras[cameraId]?
+    initCamera: (cameraId) ->
+      @cameras[cameraId] = new LibOpenCV.VideoCapture(parseInt(cameraId)) unless @cameras[cameraId]?
       camera = @cameras[cameraId]
 
-      everyId = every(0.1, () =>
+      everyId = setInterval(() =>
+        triggered = 0
         camera.read((err, im) =>
-          if im.width() > 0 and im.height() > 0
-            clearInterval(everyId) if everyId?
-            (callback)(null)
+          if im.width() > 0 and im.height() > 0 and triggered == 0
+            triggered = 1
             @connection.emit 'cameraReady'
+            clearInterval(everyId) if everyId?
         )
-      )
+      , 100)
 
     readFrame: (cameraId) ->
-      camera = @cameras[cameraId] # = OpenCV.VideoCapture(cameraId) unless @cameras[cameraId]
+      camera = @cameras[cameraId] # = LibOpenCV.VideoCapture(cameraId) unless @cameras[cameraId]
       camera.read((err, frame) =>
         @connection.emit('frameReady', err, frame)
       )
 
-    detectFaces: (im) ->
-      im.detectObject('./haarcascade_frontalface_alt.xml', {}, (err, faces) =>
-        @connection.emit('facesDetected', err, faces)
+    detectFaces: (im, haarcascade) ->
+      im.detectObject(haarcascade, {}, (err, faces) =>
+        @connection.emit('facesDetected', err, im, faces)
+      )
 
     createWindow: (windowName) ->
-      @windows[windowName] = new cv.NamedWindow(windowName, 0) unless @windows[windowName]?
+      @windows[windowName] = new LibOpenCV.NamedWindow(windowName, 0) unless @windows[windowName]?
       @windows[windowName]
 
     showFrame: (windowName, frame, delay = 42) ->
-      @windows[windowName] ?= @createWindow(windowName)
+      #@windows[windowName] ?= @createWindow(windowName)
       window = @windows[windowName]
       window.show(frame)
       keyPressed = window.blockingWaitKey(0, delay)

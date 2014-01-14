@@ -16,12 +16,8 @@ namespace "Cylon.Drivers.OpenCV", ->
   class @Window extends Cylon.Driver
 
     constructor: (opts) ->
-      super
-      @device = opts.device
-      @connection = @device.connection
-      @name = if opts.name? then opts.name else "window"
       @delay = if opts.delay then opts.delay else 0
-      #@proxyMethods @commands, @connection, this
+      super
 
     commands: ->
       ['show', 'delay']
@@ -29,9 +25,7 @@ namespace "Cylon.Drivers.OpenCV", ->
     start: (callback) ->
       Logger.debug "Window started"
       @connection.createWindow(@name)
-      #@defineDriverEvent eventName: 'frameReady'
-      #@defineDriverEvent eventName: 'facesDetected'
-      @device.emit 'windowStarted'
+      super
 
     show: (frame, delay) ->
       @connection.showFrame(@name, frame, delay)

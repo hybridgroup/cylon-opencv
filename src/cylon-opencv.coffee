@@ -8,23 +8,26 @@
 
 'use strict'
 
+namespace = require 'node-namespace'
+
 require 'cylon'
+require './opencv'
 require './camera'
 require './window'
 
 module.exports =
-  adaptor: (args...) ->
-    new Cylon.Adaptors.OpenCV(args...)
+  adaptor: (opts) ->
+    new Cylon.Adaptors.OpenCV(opts)
 
-  driver: (args...) ->
-    if args.name is 'camera'
-      new Cylon.Drivers.Camera(args...)
-    else if args.name is 'window'
-      new Cylon.Drivers.Window(args...)
+  driver: (opts) ->
+    if opts.name is 'camera'
+      new Cylon.Drivers.OpenCV.Camera(opts)
+    else if opts.name is 'window'
+      new Cylon.Drivers.OpenCV.Window(opts)
     else
       null
 
   register: (robot) ->
     robot.registerAdaptor 'cylon-opencv', 'opencv'
-    robot.registerDriver 'cylon-camera', 'camera'
-    robot.registerDriver 'cylon-window', 'window'
+    robot.registerDriver 'cylon-opencv', 'camera'
+    robot.registerDriver 'cylon-opencv', 'window'
