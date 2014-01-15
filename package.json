@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "node-namespace": "~1.0.0",
-    "cylon": "~0.8.0",
-    "opencv": ">=0.4.0"
+    "cylon": ">= 0.9.0",
+    "opencv": ">= 0.4.0"
   }
 }

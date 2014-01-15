@@ -1,17 +1,12 @@
-# Cylon.js For Opencv
+# Cylon.js For OpenCV
 
-Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
-physical computing using Node.js
+Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and physical computing using Node.js
 
-This repository contains the Cylon adaptor for Opencv.
+This repository contains the Cylon adaptor and drivers for OpenCV (http://opencv.org/), the powerful open source computer vision platform.
 
 Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
-Want to use the Go programming language to power your robots? Check out our
-sister project Gobot (http://gobot.io).
-
-For more information about Cylon, check out our repo at
-https://github.com/hybridgroup/cylon
+Want to use the Go programming language to power your robots? Check out our sister project Gobot (http://gobot.io).
 
 ## Installing
 
@@ -19,11 +14,9 @@ https://github.com/hybridgroup/cylon
 
 ## Using
 
-Using cylon-opencv is pretty easy, same as any other cylon adaptor
-making use of the appropiate cylon drivers.
+Using cylon-opencv is pretty easy, same as any other cylon adaptor making use of the appropiate cylon drivers.
 
-The following example shows how to connect to a camera and display the
-video feed in a window.
+The following example shows how to connect to a camera and display the video feed in a window.
 
 ```coffeescript
 Cylon = require('../..')
@@ -73,9 +66,7 @@ Cylon.robot
 ```
 ## Installing OpenCV and Connecting
 
-In order to use OpenCV you first need to install it and make sure it is
-working correctly on your computer. You can follow the tutorials in the
-OpenCV site to install it in your particular OS:
+In order to use OpenCV you first need to install it and make sure it is working correctly on your computer. You can follow the tutorials in the OpenCV site to install it in your particular OS:
 
 [How to install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/table_of_content_introduction/table_of_content_introduction.html#table-of-content-introduction)
 
@@ -86,14 +77,24 @@ Thank you!
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality. Lint and test your code
-using [Grunt](http://gruntjs.com/).
+* All patches must be provided under the Apache 2.0 License
+* Please use the -s option in git to "sign off" that the commit is your work and you are providing it under the Apache 2.0 License
+* Submit a Github Pull Request to the appropriate branch and ideally discuss the changes with us in IRC.
+* We will look at the patch, test it out, and give you feedback.
+* Avoid doing minor whitespace changes, renamings, etc. along with merged content. These will be done by the maintainers from time to time but they can complicate merges and should be done seperately.
+* Take care to maintain the existing coding style.
+* Add unit tests for any new or changed functionality & Lint and test your code using [Grunt](http://gruntjs.com/).
+* All pull requests should be "fast forward"
+  * If there are commits after yours use “git rebase -i <new_head_branch>”
+  * If you have local changes you may need to use “git stash”
+  * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
 
-Version 0.1.0
+[![NPM](https://nodei.co/npm/cylon-opencv.png?compact=true)](https://nodei.co/npm/cylon-opencv/)
+
+Version 0.1.0 - Initial release
 
 ## License
 
-Copyright (c) 2014 Your Name Here. See `LICENSE` for more details
+Copyright (c) 2013-2014 The Hybrid Group. Licensed under the Apache 2.0 license.
