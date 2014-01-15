@@ -74,9 +74,8 @@ Cylon.robot
 ## Installing OpenCV and Connecting
 
 In order to use OpenCV you first need to install it and make sure it is
-working correctly on your computer.
-
-You can follow the tutorials here to install in your particular OS:
+working correctly on your computer. You can follow the tutorials in the
+OpenCV site to install it in your particular OS:
 
 [How to install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/table_of_content_introduction/table_of_content_introduction.html#table-of-content-introduction)
 
