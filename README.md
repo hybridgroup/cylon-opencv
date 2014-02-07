@@ -91,7 +91,7 @@ Thank you!
 
 ## Release History
 
-[![NPM](https://nodei.co/npm/cylon-opencv.png?compact=true)](https://nodei.co/npm/cylon-opencv/)
+Version 0.2.0 - Release for Cylon.js 0.10.0
 
 Version 0.1.0 - Initial release
 
