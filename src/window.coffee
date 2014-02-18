@@ -18,7 +18,7 @@ namespace "Cylon.Drivers.OpenCV", ->
       super
 
     commands: ->
-      ['show', 'delay']
+      ['show', 'delay', 'showImage']
 
     start: (callback) ->
       Logger.debug "Window started"

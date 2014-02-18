@@ -31,7 +31,7 @@
       }
 
       OpenCV.prototype.commands = function() {
-        return ['readFrame', 'initCamera', 'detectFaces', 'createWindow', 'showFrame'];
+        return ['readFrame', 'initCamera', 'detectFaces', 'createWindow', 'showFrame', 'readImage'];
       };
 
       OpenCV.prototype.connect = function(callback) {
@@ -71,6 +71,10 @@
         return camera.read(function(err, frame) {
           return _this.connection.emit('frameReady', err, frame);
         });
+      };
+
+      OpenCV.prototype.readImage = function(image, cb) {
+        return LibOpenCV.readImage(image, cb);
       };
 
       OpenCV.prototype.detectFaces = function(im, haarcascade) {
