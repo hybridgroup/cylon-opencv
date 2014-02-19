@@ -17,7 +17,7 @@
 
   require('./opencv');
 
-  require('./cv');
+  require('./mat');
 
   require('./camera');
 
@@ -32,8 +32,8 @@
         return new Cylon.Drivers.OpenCV.Camera(opts);
       } else if (opts.name === 'window') {
         return new Cylon.Drivers.OpenCV.Window(opts);
-      } else if (opts.name === 'opencv') {
-        return new Cylon.Drivers.OpenCV.OpenCV(opts);
+      } else if (opts.name === 'mat') {
+        return new Cylon.Drivers.OpenCV.Mat(opts);
       } else {
         return null;
       }
@@ -42,7 +42,7 @@
       robot.registerAdaptor('cylon-opencv', 'opencv');
       robot.registerDriver('cylon-opencv', 'camera');
       robot.registerDriver('cylon-opencv', 'window');
-      return robot.registerDriver('cylon-opencv', 'opencv');
+      return robot.registerDriver('cylon-opencv', 'mat');
     }
   };
 

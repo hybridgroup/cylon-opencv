@@ -11,7 +11,7 @@
 namespace = require 'node-namespace'
 
 namespace "Cylon.Drivers.OpenCV", ->
-  class @OpenCV extends Cylon.Driver
+  class @Mat extends Cylon.Driver
     commands: ->
       ['readImage', 'detectFaces']
 

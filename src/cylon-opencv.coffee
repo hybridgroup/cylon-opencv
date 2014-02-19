@@ -12,7 +12,7 @@ namespace = require 'node-namespace'
 
 require 'cylon'
 require './opencv'
-require './cv'
+require './mat'
 require './camera'
 require './window'
 
@@ -25,8 +25,8 @@ module.exports =
       new Cylon.Drivers.OpenCV.Camera(opts)
     else if opts.name is 'window'
       new Cylon.Drivers.OpenCV.Window(opts)
-    else if opts.name is 'opencv'
-      new Cylon.Drivers.OpenCV.OpenCV(opts)
+    else if opts.name is 'mat'
+      new Cylon.Drivers.OpenCV.Mat(opts)
     else
       null
 
@@ -34,4 +34,4 @@ module.exports =
     robot.registerAdaptor 'cylon-opencv', 'opencv'
     robot.registerDriver 'cylon-opencv', 'camera'
     robot.registerDriver 'cylon-opencv', 'window'
-    robot.registerDriver 'cylon-opencv', 'opencv'
+    robot.registerDriver 'cylon-opencv', 'mat'
