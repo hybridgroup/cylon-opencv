@@ -19,7 +19,7 @@ namespace "Cylon.Adaptors", ->
       @windows = {}
 
     commands: ->
-      ['readFrame', 'initCamera', 'detectFaces', 'createWindow', 'showFrame']
+      ['readFrame', 'initCamera', 'detectFaces', 'createWindow', 'showFrame', 'readImage']
 
     connect: (callback) ->
       super
@@ -47,6 +47,9 @@ namespace "Cylon.Adaptors", ->
       camera.read((err, frame) =>
         @connection.emit('frameReady', err, frame)
       )
+
+    readImage: (image, cb) ->
+      LibOpenCV.readImage image, cb
 
     detectFaces: (im, haarcascade) ->
       im.detectObject(haarcascade, {}, (err, faces) =>

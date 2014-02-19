@@ -25,7 +25,7 @@
       }
 
       Window.prototype.commands = function() {
-        return ['show', 'delay'];
+        return ['show', 'delay', 'showImage'];
       };
 
       Window.prototype.start = function(callback) {
