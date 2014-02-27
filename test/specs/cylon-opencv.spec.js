@@ -1,47 +1,20 @@
-'use strict';
-var module = source("cylon-opencv");
+"use strict";
 
-describe("cylon-opencv", function() {
-  it("standard async test", function(done) {
-    var bool = false;
+var namespace = require('node-namespace'),
+    opencv = source("cylon-opencv");
 
-    bool.should.be["false"];
-
-    setTimeout(function() {
-      bool.should.be["false"];
-      bool = true;
-      return bool.should.be["true"];
-    });
-
-    150;
-
-    setTimeout(function() {
-      bool.should.be["true"];
-      done();
-    });
-
-    300;
+describe("Cylon.OpenCV", function() {
+  it("can register the adaptor and driver", function() {
+    opencv.register.should.be.a('function');
   });
 
-  it("standard sync test", function() {
-    var data = [],
-        obj = {
-          id: 5,
-          name: 'test'
-        };
-
-    data.should.be.empty;
-    data.push(obj);
-    data.should.have.length(1);
-    data[0].should.be.eql(obj);
-    data[0].should.be.equal(obj);
+  it("can create adaptor", function() {
+    opencv.adaptor.should.be.a('function');
+    expect(opencv.adaptor()).to.be.a('object');
   });
 
-  it("should be able to register", function() {
-    module.register.should.be.a('function');
-  });
-
-  it("should be able to create adaptor", function() {
-    module.adaptor.should.be.a('function');
+  it("can create driver", function() {
+    opencv.driver.should.be.a('function');
+    expect(opecv.driver({ device: {} })).to.be.a('object');
   });
 });
