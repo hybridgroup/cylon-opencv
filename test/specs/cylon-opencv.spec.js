@@ -3,7 +3,7 @@ var module = source("cylon-opencv");
 
 describe("cylon-opencv", function() {
   it("standard async test", function(done) {
-    var = false;
+    var bool = false;
 
     bool.should.be["false"];
 
