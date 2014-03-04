@@ -1,6 +1,6 @@
 {
   "name": "cylon-opencv",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "lib/cylon-opencv.js",
   "description": "Cylon module for Opencv",
   "homepage": "http://cylonjs.com",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "node-namespace": "~1.0.0",
-    "cylon": ">= 0.10.0",
+    "cylon": ">= 0.11.0",
     "opencv": ">= 0.4.0"
   }
 }

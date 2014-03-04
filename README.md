@@ -91,6 +91,8 @@ Thank you!
 
 ## Release History
 
+Version 0.2.0 - Release for Cylon.js 0.11.0, refactor to pure JavaScript, driver for general image processing
+
 Version 0.2.0 - Release for Cylon.js 0.10.0
 
 Version 0.1.0 - Initial release
