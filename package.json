@@ -2,33 +2,30 @@
   "name": "cylon-opencv",
   "version": "0.4.0",
   "main": "lib/cylon-opencv.js",
-  "description": "Cylon module for Opencv",
+  "description": "Cylon module for OpenCV",
   "homepage": "http://cylonjs.com",
-  "bugs": "Your bug report URL here",
-  "author": {
-    "name": "Your Name Here",
-    "email": "Your Email Here",
-    "url": "Your URL here"
-  },
+  "bugs": "https://github.com/hybridgroup/cylon-opencv/issues",
+
+  "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
   "repository": {
     "type": "git",
-    "url": "your git URL here"
+    "url": "https://github.com/hybridgroup/cylon-opencv"
   },
-  "licenses": [
-    {
-      "type": "your license type here"
-    }
-  ],
+
+  "license": "Apache 2.0",
+
   "devDependencies": {
     "sinon-chai": "~2.4.0",
-    "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "sinon": "~1.7.3",
-    "jshint": "~2.4.4"
+    "chai":       "~1.7.2",
+    "mocha":      "~1.12.1",
+    "sinon":      "~1.7.3",
+    "jshint":     "~2.4.4"
   },
+
   "dependencies": {
     "node-namespace": "~1.0.0",
-    "cylon": ">= 0.12.0",
-    "opencv": ">= 0.4.0"
+    "cylon":          ">= 0.12.0",
+    "opencv":         ">= 0.4.0"
   }
 }
