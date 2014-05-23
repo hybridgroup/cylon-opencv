@@ -15,6 +15,6 @@ describe("Cylon.OpenCV", function() {
 
   it("can create driver", function() {
     opencv.driver.should.be.a('function');
-    expect(opecv.driver({ device: {} })).to.be.a('object');
+    expect(opencv.driver({ name: 'mat', device: {} })).to.be.a('object');
   });
 });
