@@ -1,7 +1,6 @@
 "use strict";
 
-var namespace = require('node-namespace'),
-    opencv = source("cylon-opencv");
+var opencv = source("cylon-opencv");
 
 describe("Cylon.OpenCV", function() {
   it("can register the adaptor and driver", function() {

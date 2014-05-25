@@ -1,13 +1,11 @@
 'use strict';
 
-source('mat');
+var Mat = source('mat');
 
 var EventEmitter = require('events').EventEmitter;
 
 describe('Cylon.Drivers.OpenCV.Mat', function() {
-  var mat;
-
-  mat = new Cylon.Drivers.OpenCV.Mat({
+  var mat = new Mat({
     device: new EventEmitter
   });
 
