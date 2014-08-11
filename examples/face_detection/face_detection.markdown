@@ -17,7 +17,7 @@ Let's define the connections and devices:
         {
           name: 'camera',
           driver: 'camera',
-          camera: 1,
+          camera: 0,
           haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
         }
       ],
