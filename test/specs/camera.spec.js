@@ -37,12 +37,10 @@ describe('Camera', function() {
   });
 
   describe("#commands", function() {
-    it("is an array of Camera commands", function() {
-      var commands = camera.commands;
-      expect(commands).to.be.an('array');
-      commands.forEach(function(command) {
-        expect(command).to.be.a('string');
-      });
+    it("is an object containing Camera commands", function() {
+      for (var c in camera.commands) {
+        expect(camera.commands[c]).to.be.a('function');
+      }
     });
   });
 

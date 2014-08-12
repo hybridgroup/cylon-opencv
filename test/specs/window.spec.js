@@ -26,12 +26,10 @@ describe("Cylon.Drivers.OpenCV", function() {
   });
 
   describe("#commands", function() {
-    it("is an array of Window commands", function() {
-      var commands = win.commands;
-      expect(commands).to.be.an('array');
-      commands.forEach(function(command) {
-        expect(command).to.be.a('string');
-      });
+    it("is an object containing Window commands", function() {
+      for (var c in win.commands) {
+        expect(win.commands[c]).to.be.a('function');
+      }
     });
   });
 

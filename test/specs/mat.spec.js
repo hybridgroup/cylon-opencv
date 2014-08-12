@@ -17,12 +17,10 @@ describe('Mat', function() {
   });
 
   describe("#commands", function() {
-    it("is an array of Mat commands", function() {
-      var commands = mat.commands;
-      expect(commands).to.be.an('array');
-      commands.forEach(function(command) {
-        expect(command).to.be.a('string');
-      });
+    it("is an object containing Mat commands", function() {
+      for (var c in mat.commands) {
+        expect(mat.commands[c]).to.be.a('function');
+      }
     });
   });
 
