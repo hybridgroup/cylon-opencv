@@ -8,7 +8,7 @@ describe("Cylon.Drivers.OpenCV", function() {
   var win;
 
   beforeEach(function() {
-    win = new Window({ device: {}, name: 'window' });
+    win = new Window({ device: { connection: {} }, name: 'window' });
   });
 
   it("subclasses Cylon.Driver", function() {
@@ -20,7 +20,7 @@ describe("Cylon.Drivers.OpenCV", function() {
     it ("sets @delay to the provided delay, or 0 by default", function() {
       expect(win.delay).to.be.eql(0);
 
-      win = new Window({ device: {}, extraParams: { delay: 10 } });
+      win = new Window({ device: { connection: {} }, extraParams: { delay: 10 } });
       expect(win.delay).to.be.eql(10);
     });
   });
