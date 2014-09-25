@@ -8,7 +8,7 @@ describe('Mat', function() {
   var mat;
 
   beforeEach(function() {
-    mat = new Mat({ device: {} });
+    mat = new Mat({ device: { connection: {} } });
   });
 
   it("subclasses Cylon.Driver", function() {

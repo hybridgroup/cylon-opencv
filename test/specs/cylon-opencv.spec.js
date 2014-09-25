@@ -50,7 +50,7 @@ describe("cylon-opencv", function() {
     var opts;
 
     beforeEach(function() {
-      opts = { device: {}, extraParams: {} };
+      opts = { device: { connection: {} }, extraParams: {} };
     });
 
     context("when opts.name is 'camera'", function() {
