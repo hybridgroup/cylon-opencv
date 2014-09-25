@@ -9,7 +9,7 @@ describe('Camera', function() {
 
   beforeEach(function() {
     camera = new Camera({
-      device: {},
+      device: { connection: {} },
       extraParams: {
         camera: 0,
         haarcascade: 'path/to/cascade.xml'
