@@ -20,7 +20,7 @@ describe("Cylon.Drivers.OpenCV", function() {
     it ("sets @delay to the provided delay, or 0 by default", function() {
       expect(win.delay).to.be.eql(0);
 
-      win = new Window({ device: { connection: {} }, extraParams: { delay: 10 } });
+      win = new Window({ device: { connection: {} }, delay: 10 });
       expect(win.delay).to.be.eql(10);
     });
   });

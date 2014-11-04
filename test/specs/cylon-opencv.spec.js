@@ -5,38 +5,21 @@ var module = source("cylon-opencv");
 var Adaptor = source('adaptor');
 
 var Drivers = {
-  Mat: source('mat'),
-  Camera: source('camera'),
-  Window: source('window')
+  'mat': source('mat'),
+  'camera': source('camera'),
+  'window': source('window')
 };
 
 describe("cylon-opencv", function() {
-  describe("#register", function() {
-    var bot, adaptor, driver;
-
-    beforeEach(function() {
-      bot = {};
-
-      adaptor = bot.registerAdaptor = spy();
-      driver = bot.registerDriver = spy();
-
-      module.register(bot);
+  describe("#adaptors", function() {
+    it('is an array of supplied adaptors', function() {
+      expect(module.adaptors).to.be.eql(['opencv']);
     });
+  });
 
-    it("registers the 'opencv' adaptor with the robot", function() {
-      expect(adaptor).to.be.calledWith('cylon-opencv', 'opencv');
-    });
-
-    it("registers the 'camera' driver with the robot", function() {
-      expect(driver).to.be.calledWith('cylon-opencv', 'camera');
-    });
-
-    it("registers the 'window' driver with the robot", function() {
-      expect(driver).to.be.calledWith('cylon-opencv', 'window');
-    });
-
-    it("registers the 'mat' driver with the robot", function() {
-      expect(driver).to.be.calledWith('cylon-opencv', 'mat');
+  describe("#drivers", function() {
+    it('is an array of supplied drivers', function() {
+      expect(module.drivers).to.be.eql(['mat', 'camera', 'window']);
     });
   });
 
@@ -50,27 +33,27 @@ describe("cylon-opencv", function() {
     var opts;
 
     beforeEach(function() {
-      opts = { device: { connection: {} }, extraParams: {} };
+      opts = { device: { connection: {} } };
     });
 
-    context("when opts.name is 'camera'", function() {
+    context("when opts.driver is 'camera'", function() {
       it('returns an instance of the camera driver', function() {
-        opts.name = 'camera';
-        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.Camera);
+        opts.driver = 'camera';
+        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.camera);
       });
     });
 
-    context("when opts.name is 'window'", function() {
+    context("when opts.driver is 'window'", function() {
       it('returns an instance of the window driver', function() {
-        opts.name = 'window';
-        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.Window);
+        opts.driver = 'window';
+        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.window);
       });
     });
 
-    context("when opts.name is 'mat'", function() {
+    context("when opts.driver is 'mat'", function() {
       it('returns an instance of the mat driver', function() {
-        opts.name = 'mat';
-        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.Mat);
+        opts.driver = 'mat';
+        expect(module.driver(opts)).to.be.an.instanceOf(Drivers.mat);
       });
     });
   });
