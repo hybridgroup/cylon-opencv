@@ -33,7 +33,7 @@ describe("cylon-opencv", function() {
     var opts;
 
     beforeEach(function() {
-      opts = { device: { connection: {} } };
+      opts = { adaptor: {} };
     });
 
     context("when opts.driver is 'camera'", function() {

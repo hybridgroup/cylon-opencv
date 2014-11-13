@@ -6,6 +6,7 @@ before_install:
 install:
   - sudo apt-get install libcv-dev libcvaux-dev libhighgui-dev libopencv-dev
   - npm install
+  - npm install git://github.com/hybridgroup/cylon.git
   - npm install -g istanbul codeclimate-test-reporter
 script:
   - make cover

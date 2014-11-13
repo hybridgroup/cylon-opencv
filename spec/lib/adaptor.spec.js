@@ -78,7 +78,8 @@ describe("Adaptor", function() {
       var im;
 
       beforeEach(function() {
-        adaptor.connection = { emit: spy() };
+        adaptor.emit = spy();
+
         im = { width: stub().returns(50), height: stub().returns(50) };
 
         camera.read.yields(null, im);
@@ -89,7 +90,7 @@ describe("Adaptor", function() {
       });
 
       it("emits 'cameraReady'", function() {
-        expect(adaptor.connection.emit).to.be.calledWith("cameraReady")
+        expect(adaptor.emit).to.be.calledWith("cameraReady")
       });
 
       it("stops reading from the camera", function() {
@@ -104,7 +105,7 @@ describe("Adaptor", function() {
     var camera;
 
     beforeEach(function() {
-      adaptor.connection = { emit: spy() };
+      adaptor.emit = spy();
       camera = adaptor.cameras[1] = { read: stub() };
       camera.read.yields(null, "frame");
     });
@@ -115,7 +116,7 @@ describe("Adaptor", function() {
     });
 
     it("emits the frame on the 'frameReady' event", function() {
-      var emit = adaptor.connection.emit;
+      var emit = adaptor.emit;
       adaptor.readFrame(1);
       expect(emit).to.be.calledWith("frameReady", null, "frame");
     });
@@ -140,7 +141,7 @@ describe("Adaptor", function() {
     var image, cascade, faces;
 
     beforeEach(function() {
-      adaptor.connection = { emit: spy() };
+      adaptor.emit = spy();
       faces = ["faces"];
       cascade = "cascade";
       image = { detectObject: stub().yields(null, faces) };
@@ -153,7 +154,7 @@ describe("Adaptor", function() {
 
     it("emits detected faces on the 'facesDetected' event", function() {
       adaptor.detectFaces(image, cascade);
-      var emit = adaptor.connection.emit;
+      var emit = adaptor.emit;
       expect(emit).to.be.calledWith('facesDetected', null, image, faces);
     })
   });
