@@ -46,7 +46,7 @@ describe('Camera', function() {
     var args;
 
     beforeEach(function() {
-      camera.connection = { initCamera: spy() };
+      camera.connection = { initVideoCapture: spy() };
       camera.defineDriverEvent = spy();
 
       camera.start(function() { });
@@ -55,7 +55,8 @@ describe('Camera', function() {
     });
 
     it("defines a 'cameraReady' driver event", function() {
-      args.eventName = "cameraReady";
+      args.eventName = "videoFeedReady";
+      args.targetEventName = "cameraReady";
       expect(camera.defineDriverEvent).to.be.calledWith(args);
     });
 
@@ -70,8 +71,8 @@ describe('Camera', function() {
     });
 
     it("tells the connection to initialize the camera", function() {
-      var initCamera = camera.connection.initCamera;
-      expect(initCamera).to.be.calledWith(0, "path/to/cascade.xml");
+      var initVideoCapture = camera.connection.initVideoCapture;
+      expect(initVideoCapture).to.be.calledWith(0, "path/to/cascade.xml");
     });
   });
 

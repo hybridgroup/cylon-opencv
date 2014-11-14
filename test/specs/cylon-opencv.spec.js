@@ -7,19 +7,20 @@ var Adaptor = source('adaptor');
 var Drivers = {
   'mat': source('mat'),
   'camera': source('camera'),
+  'video': source('video'),
   'window': source('window')
 };
 
 describe("cylon-opencv", function() {
   describe("#adaptors", function() {
-    it('is an array of supplied adaptors', function() {
+    it('is an hash of supplied adaptors', function() {
       expect(module.adaptors).to.be.eql(['opencv']);
     });
   });
 
   describe("#drivers", function() {
-    it('is an array of supplied drivers', function() {
-      expect(module.drivers).to.be.eql(['mat', 'camera', 'window']);
+    it('is an hash of supplied drivers', function() {
+      expect(module.drivers).to.be.eql(['mat', 'camera', 'video', 'window']);
     });
   });
 
