@@ -105,7 +105,7 @@ describe("Adaptor", function() {
     var videoFeed;
 
     beforeEach(function() {
-      adaptor.emit = { emit: spy() };
+      adaptor.emit = spy();
       videoFeed = adaptor.videoFeeds[1] = { read: stub() };
       videoFeed.read.yields(null, "frame");
     });
