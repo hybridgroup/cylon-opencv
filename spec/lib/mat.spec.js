@@ -8,7 +8,7 @@ describe('Mat', function() {
   var mat;
 
   beforeEach(function() {
-    mat = new Mat({ adaptor: {} });
+    mat = new Mat({ connection: {} });
   });
 
   it("subclasses Cylon.Driver", function() {
@@ -40,23 +40,23 @@ describe('Mat', function() {
 
   describe("#detectFaces", function() {
     beforeEach(function() {
-      mat.adaptor = { detectFaces: spy() };
+      mat.connection = { detectFaces: spy() };
     });
 
-    it("proxies to the adaptor's #detectFaces method", function() {
+    it("proxies to the connection's #detectFaces method", function() {
       mat.detectFaces('frame', 'cascade');
-      expect(mat.adaptor.detectFaces).to.be.calledWith('frame', 'cascade');
+      expect(mat.connection.detectFaces).to.be.calledWith('frame', 'cascade');
     });
   });
 
   describe("#readImage", function() {
     beforeEach(function() {
-      mat.adaptor = { readImage: spy() };
+      mat.connection = { readImage: spy() };
     });
 
-    it("proxies to the adaptor's #readImage method", function() {
+    it("proxies to the connection's #readImage method", function() {
       mat.readImage('image', 'cb');
-      expect(mat.adaptor.readImage).to.be.calledWith('image', 'cb');
+      expect(mat.connection.readImage).to.be.calledWith('image', 'cb');
     });
   });
 });

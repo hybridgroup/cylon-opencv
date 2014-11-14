@@ -8,7 +8,7 @@ describe("Cylon.Drivers.OpenCV", function() {
   var win;
 
   beforeEach(function() {
-    win = new Window({ adaptor: {}, name: 'window' });
+    win = new Window({ connection: {}, name: 'window' });
   });
 
   it("subclasses Cylon.Driver", function() {
@@ -20,7 +20,7 @@ describe("Cylon.Drivers.OpenCV", function() {
     it ("sets @delay to the provided delay, or 0 by default", function() {
       expect(win.delay).to.be.eql(0);
 
-      win = new Window({ adaptor: {}, delay: 10 });
+      win = new Window({ connection: {}, delay: 10 });
       expect(win.delay).to.be.eql(10);
     });
   });
@@ -35,22 +35,22 @@ describe("Cylon.Drivers.OpenCV", function() {
 
   describe("#start", function() {
     beforeEach(function() {
-      win.adaptor = { createWindow: spy() };
+      win.connection = { createWindow: spy() };
     });
 
-    it("tells the adaptor to create a Window", function() {
+    it("tells the connection to create a Window", function() {
       win.start(function() {});
-      expect(win.adaptor.createWindow).to.be.calledWith(win.name);
+      expect(win.connection.createWindow).to.be.calledWith(win.name);
     });
   });
 
   describe("#show", function() {
     beforeEach(function() {
-      win.adaptor = { showFrame: spy() };
+      win.connection = { showFrame: spy() };
     });
 
-    it("tells the adaptor to show a frame", function() {
-      var showFrame = win.adaptor.showFrame;
+    it("tells the connection to show a frame", function() {
+      var showFrame = win.connection.showFrame;
 
       win.show('frame', 'delay');
       expect(showFrame).to.be.calledWith(win.name, 'frame', 'delay')
