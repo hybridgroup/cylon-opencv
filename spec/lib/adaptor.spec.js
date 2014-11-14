@@ -15,11 +15,11 @@ describe("Adaptor", function() {
   it("subclasses Cylon.Adaptor", function() {
     expect(adaptor).to.be.an.instanceOf(Cylon.Adaptor);
     expect(adaptor).to.be.an.instanceOf(Adaptor);
-  })
+  });
 
   describe("#constructor", function() {
-    it('sets @cameras to an empty object by default', function() {
-      expect(adaptor.cameras).to.be.eql({});
+    it('sets @videoFeeds to an empty object by default', function() {
+      expect(adaptor.videoFeeds).to.be.eql({});
     });
 
     it('sets @windows to an empty object by default', function() {
@@ -37,44 +37,44 @@ describe("Adaptor", function() {
     });
   });
 
-  describe("#initCamera", function() {
-    var clock, camera;
+  describe("#initVideoCapture", function() {
+    var clock, videoFeed;
 
     beforeEach(function() {
       clock = sinon.useFakeTimers();
-      camera = { read: stub() };
-      stub(OpenCV, 'VideoCapture').returns(camera);
+      videoFeed = { read: stub() };
+      stub(OpenCV, 'VideoCapture').returns(videoFeed);
     });
 
     afterEach(function() {
       OpenCV.VideoCapture.restore();
     });
 
-    it("initializes a new OpenCV video capture with the provided camera ID", function() {
-      adaptor.initCamera("1");
+    it("initializes a new OpenCV video capture with the provided video feed ID", function() {
+      adaptor.initVideoCapture(1);
       expect(OpenCV.VideoCapture).to.be.calledWithNew;
       expect(OpenCV.VideoCapture).to.be.calledWith(1);
     });
 
-    it("attempts to read from the camera every 100ms", function() {
-      adaptor.initCamera("1");
+    it("attempts to read from the video feed every 100ms", function() {
+      adaptor.initVideoCapture("1");
 
       clock.tick(100);
-      expect(camera.read).to.be.calledOnce;
+      expect(videoFeed.read).to.be.calledOnce;
 
       clock.tick(100);
-      expect(camera.read).to.be.calledTwice;
+      expect(videoFeed.read).to.be.calledTwice;
     });
 
-    context("if the camera is already initialized", function() {
+    context("if the video feed is already initialized", function() {
       it("doesn't try to register it again", function() {
-        adaptor.cameras[1] = {};
-        adaptor.initCamera("1");
+        adaptor.videoFeeds[1] = {};
+        adaptor.initVideoCapture("1");
         expect(OpenCV.VideoCapture).to.not.be.called;
       });
     })
 
-    context("when the camera starts sending images", function() {
+    context("when the video feed starts sending images", function() {
       var im;
 
       beforeEach(function() {
@@ -82,37 +82,37 @@ describe("Adaptor", function() {
 
         im = { width: stub().returns(50), height: stub().returns(50) };
 
-        camera.read.yields(null, im);
+        videoFeed.read.yields(null, im);
 
-        adaptor.initCamera('1');
+        adaptor.initVideoCapture('1');
 
         clock.tick(100);
       });
 
-      it("emits 'cameraReady'", function() {
-        expect(adaptor.emit).to.be.calledWith("cameraReady")
+      it("emits 'videoFeedReady'", function() {
+        expect(adaptor.emit).to.be.calledWith("videoFeedReady")
       });
 
-      it("stops reading from the camera", function() {
-        expect(camera.read).to.be.calledOnce;
+      it("stops reading from the video feed", function() {
+        expect(videoFeed.read).to.be.calledOnce;
         clock.tick(500);
-        expect(camera.read).to.be.calledOnce;
+        expect(videoFeed.read).to.be.calledOnce;
       });
     });
   });
 
   describe("readFrame", function() {
-    var camera;
+    var videoFeed;
 
     beforeEach(function() {
       adaptor.emit = spy();
-      camera = adaptor.cameras[1] = { read: stub() };
-      camera.read.yields(null, "frame");
+      videoFeed = adaptor.videoFeeds[1] = { read: stub() };
+      videoFeed.read.yields(null, "frame");
     });
 
-    it('reads a frame from the camera', function() {
+    it('reads a frame from the video feed', function() {
       adaptor.readFrame(1);
-      expect(camera.read).to.be.called;
+      expect(videoFeed.read).to.be.called;
     });
 
     it("emits the frame on the 'frameReady' event", function() {
