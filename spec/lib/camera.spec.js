@@ -9,7 +9,7 @@ describe('Camera', function() {
 
   beforeEach(function() {
     camera = new Camera({
-      device: { connection: {} },
+      adaptor: {},
       camera: 0,
       haarcascade: 'path/to/cascade.xml'
     });
@@ -46,7 +46,7 @@ describe('Camera', function() {
     var args;
 
     beforeEach(function() {
-      camera.connection = { initVideoCapture: spy() };
+      camera.adaptor = { initVideoCapture: spy() };
       camera.defineDriverEvent = spy();
 
       camera.start(function() { });
@@ -70,30 +70,30 @@ describe('Camera', function() {
       expect(camera.defineDriverEvent).to.be.calledWith(args);
     });
 
-    it("tells the connection to initialize the camera", function() {
-      var initVideoCapture = camera.connection.initVideoCapture;
+    it("tells the adaptor to initialize the camera", function() {
+      var initVideoCapture = camera.adaptor.initVideoCapture;
       expect(initVideoCapture).to.be.calledWith(0, "path/to/cascade.xml");
     });
   });
 
   describe("readFrame", function() {
     beforeEach(function() {
-      camera.connection = { readFrame: spy() }
+      camera.adaptor = { readFrame: spy() }
     });
 
-    it("tells the connection to read a frame from the camera", function() {
+    it("tells the adaptor to read a frame from the camera", function() {
       camera.readFrame();
-      expect(camera.connection.readFrame).to.be.calledWith(0);
+      expect(camera.adaptor.readFrame).to.be.calledWith(0);
     });
   });
 
   describe("detectFaces", function() {
     beforeEach(function() {
-      camera.connection = { detectFaces: spy() }
+      camera.adaptor = { detectFaces: spy() }
     });
 
-    it("tells the connection to detect faces from the camera", function() {
-      var detectFaces = camera.connection.detectFaces;
+    it("tells the adaptor to detect faces from the camera", function() {
+      var detectFaces = camera.adaptor.detectFaces;
       camera.detectFaces('frame');
       expect(detectFaces).to.be.calledWith('frame', 'path/to/cascade.xml');
     });

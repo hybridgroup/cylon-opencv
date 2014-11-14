@@ -15,7 +15,7 @@ describe("Adaptor", function() {
   it("subclasses Cylon.Adaptor", function() {
     expect(adaptor).to.be.an.instanceOf(Cylon.Adaptor);
     expect(adaptor).to.be.an.instanceOf(Adaptor);
-  })
+  });
 
   describe("#constructor", function() {
     it('sets @videoFeeds to an empty object by default', function() {
@@ -78,7 +78,8 @@ describe("Adaptor", function() {
       var im;
 
       beforeEach(function() {
-        adaptor.connection = { emit: spy() };
+        adaptor.emit = spy();
+
         im = { width: stub().returns(50), height: stub().returns(50) };
 
         videoFeed.read.yields(null, im);
@@ -89,7 +90,7 @@ describe("Adaptor", function() {
       });
 
       it("emits 'videoFeedReady'", function() {
-        expect(adaptor.connection.emit).to.be.calledWith("videoFeedReady")
+        expect(adaptor.emit).to.be.calledWith("videoFeedReady")
       });
 
       it("stops reading from the video feed", function() {
@@ -104,7 +105,7 @@ describe("Adaptor", function() {
     var videoFeed;
 
     beforeEach(function() {
-      adaptor.connection = { emit: spy() };
+      adaptor.emit = { emit: spy() };
       videoFeed = adaptor.videoFeeds[1] = { read: stub() };
       videoFeed.read.yields(null, "frame");
     });
@@ -115,7 +116,7 @@ describe("Adaptor", function() {
     });
 
     it("emits the frame on the 'frameReady' event", function() {
-      var emit = adaptor.connection.emit;
+      var emit = adaptor.emit;
       adaptor.readFrame(1);
       expect(emit).to.be.calledWith("frameReady", null, "frame");
     });
@@ -140,7 +141,7 @@ describe("Adaptor", function() {
     var image, cascade, faces;
 
     beforeEach(function() {
-      adaptor.connection = { emit: spy() };
+      adaptor.emit = spy();
       faces = ["faces"];
       cascade = "cascade";
       image = { detectObject: stub().yields(null, faces) };
@@ -153,7 +154,7 @@ describe("Adaptor", function() {
 
     it("emits detected faces on the 'facesDetected' event", function() {
       adaptor.detectFaces(image, cascade);
-      var emit = adaptor.connection.emit;
+      var emit = adaptor.emit;
       expect(emit).to.be.calledWith('facesDetected', null, image, faces);
     })
   });
