@@ -2,15 +2,14 @@ var Cylon = require('cylon');
 
 Cylon.robot({
   connection: { name: 'opencv', adaptor: 'opencv', module: 'cylon-opencv' },
-  devices: [
-    { name: 'window', driver: 'window' },
-    {
-      name: 'video',
+  devices: {
+    window: { driver: 'window' },
+    video: {
       driver: 'video',
       video: './video1.avi',
       haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
     }
-  ],
+  },
 
   work: function(my) {
     my.video.once('videoReady', function() {

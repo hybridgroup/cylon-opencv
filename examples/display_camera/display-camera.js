@@ -2,15 +2,14 @@ var Cylon = require('cylon');
 
 Cylon.robot({
   connection: { name: 'opencv', adaptor: 'opencv' },
-  devices: [
-    { name: 'window', driver: 'window' },
-    {
-      name: 'camera',
+  devices: {
+    window: { driver: 'window' },
+    camera: {
       driver: 'camera',
       camera: 0,
       haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
     }
-  ],
+  },
 
   work: function(my) {
     my.camera.once('cameraReady', function() {

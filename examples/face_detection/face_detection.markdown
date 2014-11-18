@@ -12,15 +12,14 @@ Now that we have Cylon imported, we can start defining our robot
 Let's define the connections and devices:
 
       connection: { name: 'opencv', adaptor: 'opencv' },
-      devices: [
-        { name: 'window', driver: 'window' },
-        {
-          name: 'camera',
+      devices: {
+        window: { driver: 'window' },
+        camera: {
           driver: 'camera',
           camera: 0,
           haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
         }
-      ],
+      },
 
 Now that Cylon knows about the necessary hardware we're going to be using, we'll
 tell it what work we want to do:
