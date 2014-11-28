@@ -1,6 +1,6 @@
 {
   "name": "cylon-opencv",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "main": "lib/cylon-opencv.js",
   "description": "Cylon module for OpenCV",
   "homepage": "http://cylonjs.com",
@@ -24,11 +24,11 @@
   },
 
   "peerDependencies": {
-    "cylon": ">= 0.20.1 < 1"
+    "cylon": ">= 0.21.0 < 1"
   },
 
   "dependencies": {
-    "cylon":  "~0.20.1",
+    "cylon":  "~0.21.0",
     "opencv": "git://github.com/hybridgroup/node-opencv.git"
   }
 }

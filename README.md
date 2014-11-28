@@ -95,6 +95,8 @@ Thank you!
 
 ## Release History
 
+Version 0.11.0 - Compatibility with Cylon 0.21.0
+
 Version 0.10.1 - Use Hybrid Group fork of node-opencv
 
 Version 0.10.0 - Compatibility with Cylon 0.20.0
