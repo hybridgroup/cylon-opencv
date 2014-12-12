@@ -24,7 +24,9 @@ The following example shows how to connect to a camera and display the video fee
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'opencv', adaptor: 'opencv' },
+  connections: {
+    opencv: { adaptor: 'opencv' }
+  },
 
   devices: {
     window: { driver: 'opencv' },
