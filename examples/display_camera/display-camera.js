@@ -1,7 +1,10 @@
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: 'opencv', adaptor: 'opencv' },
+  connections: {
+    opencv: { adaptor: 'opencv' }
+  },
+
   devices: {
     window: { driver: 'window' },
     camera: {

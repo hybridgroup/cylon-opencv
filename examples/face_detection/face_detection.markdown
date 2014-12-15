@@ -11,7 +11,10 @@ Now that we have Cylon imported, we can start defining our robot
 
 Let's define the connections and devices:
 
-      connection: { name: 'opencv', adaptor: 'opencv' },
+      connections: {
+        opencv: { adaptor: 'opencv' }
+      },
+
       devices: {
         window: { driver: 'window' },
         camera: {
