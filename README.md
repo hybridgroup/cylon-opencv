@@ -10,15 +10,68 @@ Want to use the Go programming language to power your robots? Check out our sist
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/cylon-opencv.png?branch=master)](http://travis-ci.org/hybridgroup/cylon-opencv) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon-opencv/badges/gpa.svg)](https://codeclimate.com/github/hybridgroup/cylon-opencv) [![Test Coverage](https://codeclimate.com/github/hybridgroup/cylon-opencv/badges/coverage.svg)](https://codeclimate.com/github/hybridgroup/cylon-opencv)
 
-## Installing
+## How to Install
 
-    npm install cylon-opencv
+    $ npm install cylon-opencv
 
-## Using
+In order to use OpenCV you first need to install it and make sure it is working correctly on your computer.
+You can follow the tutorials in the [OpenCV site][site] to install it in your particular OS:
+
+[site]: http://docs.opencv.org/doc/tutorials/introduction/table_of_content_introduction/table_of_content_introduction.html#table-of-content-introduction
+
+### Ubuntu
+
+```bash
+#!/bin/bash
+sudo apt-get -y install autoconf automake build-essential git libass-dev libgpac-dev \
+  libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libx11-dev \
+  libxext-dev libxfixes-dev pkg-config texi2html zlib1g-dev yasm libmp3lame-dev \
+  libopus-dev libvpx-dev cmake libgtk2.0-dev pkg-config libjpeg8 libjpeg8-dev \
+  libgstreamer0.10-0 libgstreamer0.10-dev gstreamer0.10-tools gstreamer0.10-plugins-base \
+  libgstreamer-plugins-base0.10-dev gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly \
+  gstreamer0.10-plugins-bad gstreamer0.10-ffmpeg
+mkdir ~/ffmpeg_sources
+cd ~/ffmpeg_sources
+git clone --depth 1 git://git.videolan.org/x264.git
+cd x264
+./configure --prefix="/usr/local" --bindir="/usr/local/bin" --enable-shared --enable-pic
+make
+sudo make install
+cd ~/ffmpeg_sources
+git clone --depth 1 git://git.code.sf.net/p/opencore-amr/fdk-aac
+cd fdk-aac
+autoreconf -fiv
+./configure --prefix="/usr/local" --bindir="/usr/local/bin" --enable-shared --with-pic
+make
+sudo make install
+cd ~/ffmpeg_sources
+git clone --depth 1 git://source.ffmpeg.org/ffmpeg
+cd ffmpeg
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+./configure --prefix="/usr/local"   --extra-cflags="-I/usr/local/include" --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin" \
+  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac   --enable-libmp3lame --enable-libopus --enable-libtheora \
+  --enable-libvorbis --enable-libvpx   --enable-libx264 --enable-nonfree --enable-x11grab --enable-shared --enable-pic
+make
+sudo make install
+hash -r
+cd ~
+git clone --depth 1 -b 2.4.6.2 https://github.com/Itseez/opencv.git
+cd opencv
+mkdir release
+cd release
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make
+sudo make install
+```
+
+## How to Use
 
 Using cylon-opencv is pretty easy, same as any other cylon adaptor making use of the appropiate cylon drivers.
 
 The following example shows how to connect to a camera and display the video feed in a window.
+
+Before running it be sure that `haarcascade_frontalface_alt.xml` file is referenced to the correct location.
+You can download the file [here](https://github.com/hybridgroup/cylon-opencv/blob/master/examples/display_camera/haarcascade_frontalface_alt.xml).
 
 ```javascript
 var Cylon = require('cylon');
@@ -28,8 +81,9 @@ Cylon.robot({
     opencv: { adaptor: 'opencv' }
   },
 
+
   devices: {
-    window: { driver: 'opencv' },
+    window: { driver: 'window' },
     camera: {
       driver: 'camera',
       camera: 1,
@@ -70,13 +124,15 @@ Cylon.robot({
 
 Cylon.start();
 ```
-## Installing OpenCV and Connecting
+
+## How to Connect
 
 In order to use OpenCV you first need to install it and make sure it is working correctly on your computer. You can follow the tutorials in the OpenCV site to install it in your particular OS:
 
 [How to install OpenCV](http://docs.opencv.org/doc/tutorials/introduction/table_of_content_introduction/table_of_content_introduction.html#table-of-content-introduction)
 
 ## Documentation
+
 We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
 
 Thank you!
