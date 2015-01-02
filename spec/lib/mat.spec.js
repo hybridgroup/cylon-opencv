@@ -1,10 +1,11 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Cylon = require('cylon');
+var Cylon = require("cylon");
 
-var Mat = source('mat');
+var Mat = source("mat");
 
-describe('Mat', function() {
+describe("Mat", function() {
   var mat;
 
   beforeEach(function() {
@@ -19,7 +20,7 @@ describe('Mat', function() {
   describe("#commands", function() {
     it("is an object containing Mat commands", function() {
       for (var c in mat.commands) {
-        expect(mat.commands[c]).to.be.a('function');
+        expect(mat.commands[c]).to.be.a("function");
       }
     });
   });
@@ -32,7 +33,7 @@ describe('Mat', function() {
 
     it("defines the 'facesDetected' event", function() {
       expect(mat.defineDriverEvent).to.be.calledWith({
-        eventName: 'facesDetected',
+        eventName: "facesDetected",
         sendUpdate: false
       });
     });
@@ -44,8 +45,8 @@ describe('Mat', function() {
     });
 
     it("proxies to the connection's #detectFaces method", function() {
-      mat.detectFaces('frame', 'cascade');
-      expect(mat.connection.detectFaces).to.be.calledWith('frame', 'cascade');
+      mat.detectFaces("frame", "cascade");
+      expect(mat.connection.detectFaces).to.be.calledWith("frame", "cascade");
     });
   });
 
@@ -55,8 +56,8 @@ describe('Mat', function() {
     });
 
     it("proxies to the connection's #readImage method", function() {
-      mat.readImage('image', 'cb');
-      expect(mat.connection.readImage).to.be.calledWith('image', 'cb');
+      mat.readImage("image", "cb");
+      expect(mat.connection.readImage).to.be.calledWith("image", "cb");
     });
   });
 });

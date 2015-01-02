@@ -1,14 +1,16 @@
-var Cylon = require('cylon');
+"use strict";
+
+var Cylon = require("cylon");
 
 Cylon.robot({
   connections: {
-    opencv: { adaptor: 'opencv' }
+    opencv: { adaptor: "opencv" }
   },
 
   devices: {
-    window: { driver: 'window' },
+    window: { driver: "window" },
     camera: {
-      driver: 'camera',
+      driver: "camera",
       camera: 0,
       haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
     }
@@ -18,15 +20,15 @@ Cylon.robot({
     // We setup our face detection when the camera is ready to
     // display images, we use `once` instead of `on` to make sure
     // other event listeners are only registered once.
-    my.camera.once('cameraReady', function() {
-      console.log('The camera is ready!');
+    my.camera.once("cameraReady", function() {
+      console.log("The camera is ready!");
 
       // We add a listener for the facesDetected event
       // here, we will get (err, image/frame, faces) params back in
       // the listener function that we pass.
       // The faces param is an array conaining any face detected
       // in the frame (im).
-      my.camera.on('facesDetected', function(err, im, faces) {
+      my.camera.on("facesDetected", function(err, im, faces) {
         // We loop through the faces and manipulate the image
         // to display a square in the coordinates for the detected
         // faces.
@@ -56,7 +58,7 @@ Cylon.robot({
       // We listen for frameReady event, when triggered
       // we start the face detection passing the frame
       // that we just got from the camera feed.
-      my.camera.on('frameReady', function(err, im) {
+      my.camera.on("frameReady", function(err, im) {
         my.camera.detectFaces(im);
       });
 

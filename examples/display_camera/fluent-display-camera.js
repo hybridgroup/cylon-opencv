@@ -1,30 +1,32 @@
-var Cylon = require('cylon');
+"use strict";
+
+var Cylon = require("cylon");
 
 Cylon
   .robot()
-  .connection("opencv", { name: 'opencv', adaptor: 'opencv' })
-  .device("window", { driver: 'window' })
+  .connection("opencv", { name: "opencv", adaptor: "opencv" })
+  .device("window", { driver: "window" })
   .device("camera", {
-    driver: 'camera',
+    driver: "camera",
     camera: 0,
     haarcascade: __dirname + "/haarcascade_frontalface_alt.xml"
   })
 
-  .on('ready', function(bot) {
-    bot.camera.once('cameraReady', function() {
-      console.log('The camera is ready!');
+  .on("ready", function(bot) {
+    bot.camera.once("cameraReady", function() {
+      console.log("The camera is ready!");
 
       // We listen for frame ready event, when triggered
       // we display the frame/image passed as an argument to
       // the listener function, and we tell the window to wait 40 milliseconds
-      bot.camera.on('frameReady', function(err, im) {
+      bot.camera.on("frameReady", function(err, im) {
         console.log("FRAMEREADY!");
         bot.window.show(im, 40);
       });
 
       // Here we have two options to start reading frames from
       // the camera feed.
-      // 1. 'As fast as possible': triggering the next frame read
+      // 1. "As fast as possible": triggering the next frame read
       //    in the listener for frameReady, if you need video
       //    as smooth as possible uncomment #bot.camera.readFrame()
       //    in the listener above and the one below this comment.

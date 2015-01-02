@@ -1,9 +1,10 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Cylon = require('cylon'),
-    OpenCV = require('opencv');
+var Cylon = require("cylon"),
+    OpenCV = require("opencv");
 
-var Adaptor = source('adaptor');
+var Adaptor = source("adaptor");
 
 describe("Adaptor", function() {
   var adaptor;
@@ -18,11 +19,11 @@ describe("Adaptor", function() {
   });
 
   describe("#constructor", function() {
-    it('sets @videoFeeds to an empty object by default', function() {
+    it("sets @videoFeeds to an empty object by default", function() {
       expect(adaptor.videoFeeds).to.be.eql({});
     });
 
-    it('sets @windows to an empty object by default', function() {
+    it("sets @windows to an empty object by default", function() {
       expect(adaptor.windows).to.be.eql({});
     });
   });
@@ -30,9 +31,9 @@ describe("Adaptor", function() {
   describe("#commands", function() {
     it("is an array of Adaptor commands", function() {
       var commands = adaptor.commands;
-      expect(commands).to.be.an('array');
+      expect(commands).to.be.an("array");
       commands.forEach(function(command) {
-        expect(command).to.be.a('string');
+        expect(command).to.be.a("string");
       });
     });
   });
@@ -43,14 +44,14 @@ describe("Adaptor", function() {
     beforeEach(function() {
       clock = sinon.useFakeTimers();
       videoFeed = { read: stub() };
-      stub(OpenCV, 'VideoCapture').returns(videoFeed);
+      stub(OpenCV, "VideoCapture").returns(videoFeed);
     });
 
     afterEach(function() {
       OpenCV.VideoCapture.restore();
     });
 
-    it("initializes a new OpenCV video capture with the provided video feed ID", function() {
+    it("initializes a new video capture with the provided feed ID", function() {
       adaptor.initVideoCapture(1);
       expect(OpenCV.VideoCapture).to.be.calledWithNew;
       expect(OpenCV.VideoCapture).to.be.calledWith(1);
@@ -72,7 +73,7 @@ describe("Adaptor", function() {
         adaptor.initVideoCapture("1");
         expect(OpenCV.VideoCapture).to.not.be.called;
       });
-    })
+    });
 
     context("when the video feed starts sending images", function() {
       var im;
@@ -84,13 +85,13 @@ describe("Adaptor", function() {
 
         videoFeed.read.yields(null, im);
 
-        adaptor.initVideoCapture('1');
+        adaptor.initVideoCapture("1");
 
         clock.tick(100);
       });
 
       it("emits 'videoFeedReady'", function() {
-        expect(adaptor.emit).to.be.calledWith("videoFeedReady")
+        expect(adaptor.emit).to.be.calledWith("videoFeedReady");
       });
 
       it("stops reading from the video feed", function() {
@@ -110,7 +111,7 @@ describe("Adaptor", function() {
       videoFeed.read.yields(null, "frame");
     });
 
-    it('reads a frame from the video feed', function() {
+    it("reads a frame from the video feed", function() {
       adaptor.readFrame(1);
       expect(videoFeed.read).to.be.called;
     });
@@ -124,7 +125,7 @@ describe("Adaptor", function() {
 
   describe("#readImage", function() {
     beforeEach(function() {
-      stub(OpenCV, 'readImage');
+      stub(OpenCV, "readImage");
     });
 
     afterEach(function() {
@@ -132,8 +133,8 @@ describe("Adaptor", function() {
     });
 
     it("proxies to the #readImage method in OpenCV", function() {
-      adaptor.readImage('image', 'cb');
-      expect(OpenCV.readImage).to.be.calledWith('image', 'cb');
+      adaptor.readImage("image", "cb");
+      expect(OpenCV.readImage).to.be.calledWith("image", "cb");
     });
   });
 
@@ -147,7 +148,7 @@ describe("Adaptor", function() {
       image = { detectObject: stub().yields(null, faces) };
     });
 
-    it("calls the image's #detectObject method with passed haarcascade", function() {
+    it("calls the image's #detectObject method", function() {
       adaptor.detectFaces(image, cascade);
       expect(image.detectObject).to.be.calledWith(cascade);
     });
@@ -155,8 +156,8 @@ describe("Adaptor", function() {
     it("emits detected faces on the 'facesDetected' event", function() {
       adaptor.detectFaces(image, cascade);
       var emit = adaptor.emit;
-      expect(emit).to.be.calledWith('facesDetected', null, image, faces);
-    })
+      expect(emit).to.be.calledWith("facesDetected", null, image, faces);
+    });
   });
 
   describe("createWindow", function() {
@@ -164,7 +165,7 @@ describe("Adaptor", function() {
 
     beforeEach(function() {
       mockWindow = {};
-      stub(OpenCV, 'NamedWindow').returns(mockWindow);
+      stub(OpenCV, "NamedWindow").returns(mockWindow);
     });
 
     afterEach(function() {
@@ -198,22 +199,22 @@ describe("Adaptor", function() {
 
     beforeEach(function() {
       win = { show: spy(), blockingWaitKey: spy() };
-      adaptor.windows = { 'window': win };
+      adaptor.windows = { "window": win };
       frame = "frame";
     });
 
     it("tells the window to show the provided frame", function() {
-      adaptor.showFrame('window', frame);
+      adaptor.showFrame("window", frame);
       expect(win.show).to.be.calledWith(frame);
     });
 
-    it('sets a blocking delay', function() {
-      adaptor.showFrame('window', frame, 100);
+    it("sets a blocking delay", function() {
+      adaptor.showFrame("window", frame, 100);
       expect(win.blockingWaitKey).to.be.calledWith(0, 100);
     });
 
     it("defaults the delay to 42 if one isn't provided", function() {
-      adaptor.showFrame('window', frame);
+      adaptor.showFrame("window", frame);
       expect(win.blockingWaitKey).to.be.calledWith(0, 42);
     });
   });

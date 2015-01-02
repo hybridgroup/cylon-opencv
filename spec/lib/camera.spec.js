@@ -1,21 +1,22 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Cylon = require('cylon');
+var Cylon = require("cylon");
 
-var Camera = source('camera');
+var Camera = source("camera");
 
-describe('Camera', function() {
+describe("Camera", function() {
   var camera;
 
   beforeEach(function() {
     camera = new Camera({
       connection: {},
       camera: 0,
-      haarcascade: 'path/to/cascade.xml'
+      haarcascade: "path/to/cascade.xml"
     });
   });
 
-  it('subclasses Cylon.Driver', function() {
+  it("subclasses Cylon.Driver", function() {
     expect(camera).to.be.an.instanceOf(Cylon.Driver);
     expect(camera).to.be.an.instanceOf(Camera);
   });
@@ -37,7 +38,7 @@ describe('Camera', function() {
   describe("#commands", function() {
     it("is an object containing Camera commands", function() {
       for (var c in camera.commands) {
-        expect(camera.commands[c]).to.be.a('function');
+        expect(camera.commands[c]).to.be.a("function");
       }
     });
   });
@@ -51,7 +52,7 @@ describe('Camera', function() {
 
       camera.start(function() { });
 
-      args = { eventName: '', sendUpdate: false };
+      args = { eventName: "", sendUpdate: false };
     });
 
     it("defines a 'cameraReady' driver event", function() {
@@ -78,7 +79,7 @@ describe('Camera', function() {
 
   describe("readFrame", function() {
     beforeEach(function() {
-      camera.connection = { readFrame: spy() }
+      camera.connection = { readFrame: spy() };
     });
 
     it("tells the connection to read a frame from the camera", function() {
@@ -89,13 +90,13 @@ describe('Camera', function() {
 
   describe("detectFaces", function() {
     beforeEach(function() {
-      camera.connection = { detectFaces: spy() }
+      camera.connection = { detectFaces: spy() };
     });
 
     it("tells the connection to detect faces from the camera", function() {
       var detectFaces = camera.connection.detectFaces;
-      camera.detectFaces('frame');
-      expect(detectFaces).to.be.calledWith('frame', 'path/to/cascade.xml');
+      camera.detectFaces("frame");
+      expect(detectFaces).to.be.calledWith("frame", "path/to/cascade.xml");
     });
   });
 });

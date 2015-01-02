@@ -1,14 +1,15 @@
-'use strict';
+/* jshint expr:true */
+"use strict";
 
-var Cylon = require('cylon');
+var Cylon = require("cylon");
 
-var Window = source('window');
+var Window = source("window");
 
 describe("Cylon.Drivers.OpenCV", function() {
   var win;
 
   beforeEach(function() {
-    win = new Window({ connection: {}, name: 'window' });
+    win = new Window({ connection: {}, name: "window" });
   });
 
   it("subclasses Cylon.Driver", function() {
@@ -28,7 +29,7 @@ describe("Cylon.Drivers.OpenCV", function() {
   describe("#commands", function() {
     it("is an object containing Window commands", function() {
       for (var c in win.commands) {
-        expect(win.commands[c]).to.be.a('function');
+        expect(win.commands[c]).to.be.a("function");
       }
     });
   });
@@ -52,8 +53,8 @@ describe("Cylon.Drivers.OpenCV", function() {
     it("tells the connection to show a frame", function() {
       var showFrame = win.connection.showFrame;
 
-      win.show('frame', 'delay');
-      expect(showFrame).to.be.calledWith(win.name, 'frame', 'delay')
+      win.show("frame", "delay");
+      expect(showFrame).to.be.calledWith(win.name, "frame", "delay");
     });
   });
 });
