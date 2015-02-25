@@ -29,6 +29,6 @@
 
   "dependencies": {
     "cylon":  "~0.22.0",
-    "opencv": "git://github.com/hybridgroup/node-opencv.git"
+    "opencv": ">=3.0.0"
   }
 }
