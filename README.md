@@ -12,7 +12,7 @@ Want to use the Go programming language to power your robots? Check out our sist
 
 ## How to Install
 
-    $ npm install cylon-opencv
+    $ npm install cylon cylon-opencv
 
 In order to use OpenCV you first need to install it and make sure it is working correctly on your computer.
 You can follow the tutorials in the [OpenCV site][site] to install it in your particular OS:
