@@ -13,7 +13,21 @@
     "url": "https://github.com/hybridgroup/cylon-opencv"
   },
 
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
+
+  "keywords": [
+    "cylon",
+    "cylonjs",
+    "cylons",
+    "robot",
+    "robots",
+    "robotics",
+    "iot",
+    "hardware",
+    "opencv",
+    "vision",
+    "computer vision"
+  ],
 
   "devDependencies": {
     "sinon-chai": "~2.4.0",
