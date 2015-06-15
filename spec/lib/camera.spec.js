@@ -1,9 +1,8 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = require("cylon");
 
-var Camera = source("camera");
+var Camera = lib("camera");
 
 describe("Camera", function() {
   var camera;

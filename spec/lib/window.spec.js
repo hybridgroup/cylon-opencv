@@ -1,9 +1,8 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = require("cylon");
 
-var Window = source("window");
+var Window = lib("window");
 
 describe("Cylon.Drivers.OpenCV", function() {
   var win;
@@ -18,7 +17,7 @@ describe("Cylon.Drivers.OpenCV", function() {
   });
 
   describe("#constructor", function() {
-    it ("sets @delay to the provided delay, or 0 by default", function() {
+    it("sets @delay to the provided delay, or 0 by default", function() {
       expect(win.delay).to.be.eql(0);
 
       win = new Window({ connection: {}, delay: 10 });

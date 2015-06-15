@@ -12,6 +12,7 @@ Cylon
       console.log("the camera is ready!");
 
       bot.camera.on("frameReady", function(err, im) {
+        if (err) { console.log(err); }
         bot.window.show(im, 5000);
       });
 

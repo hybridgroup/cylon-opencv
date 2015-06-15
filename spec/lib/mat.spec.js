@@ -1,9 +1,8 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = require("cylon");
 
-var Mat = source("mat");
+var Mat = lib("mat");
 
 describe("Mat", function() {
   var mat;

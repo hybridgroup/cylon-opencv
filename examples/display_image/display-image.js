@@ -17,6 +17,7 @@ Cylon.robot({
       console.log("THE CAMERA IS READY!");
 
       my.camera.on("frameReady", function(err, im) {
+        if (err) { console.log(err); }
         my.window.show(im, 5000);
       });
 

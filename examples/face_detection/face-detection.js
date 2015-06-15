@@ -29,6 +29,8 @@ Cylon.robot({
       // The faces param is an array conaining any face detected
       // in the frame (im).
       my.camera.on("facesDetected", function(err, im, faces) {
+        if (err) { console.log(err); }
+
         // We loop through the faces and manipulate the image
         // to display a square in the coordinates for the detected
         // faces.
@@ -59,6 +61,7 @@ Cylon.robot({
       // we start the face detection passing the frame
       // that we just got from the camera feed.
       my.camera.on("frameReady", function(err, im) {
+        if (err) { console.log(err); }
         my.camera.detectFaces(im);
       });
 

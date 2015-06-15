@@ -1,10 +1,9 @@
-/* jshint expr:true */
 "use strict";
 
 var Cylon = require("cylon"),
     OpenCV = require("opencv");
 
-var Adaptor = source("adaptor");
+var Adaptor = lib("adaptor");
 
 describe("Adaptor", function() {
   var adaptor;
@@ -183,7 +182,7 @@ describe("Adaptor", function() {
 
     context("if a window with the provided name already exists", function() {
       beforeEach(function() {
-        adaptor.windows["window"] = mockWindow;
+        adaptor.windows.window = mockWindow;
       });
 
       it("returns the existing window", function() {
@@ -199,7 +198,7 @@ describe("Adaptor", function() {
 
     beforeEach(function() {
       win = { show: spy(), blockingWaitKey: spy() };
-      adaptor.windows = { "window": win };
+      adaptor.windows = { window: win };
       frame = "frame";
     });
 

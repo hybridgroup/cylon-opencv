@@ -24,6 +24,7 @@ Cylon.robot({
       // we display the frame/image passed as an argument to
       // the listener function, and we tell the window to wait 40 milliseconds
       my.camera.on("frameReady", function(err, im) {
+        if (err) { console.error(err); }
         console.log("FRAMEREADY!");
         my.window.show(im, 40);
       });

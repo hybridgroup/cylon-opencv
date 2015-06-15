@@ -1,15 +1,14 @@
-/* jshint expr:true */
 "use strict";
 
-var opencv = source("cylon-opencv");
+var opencv = lib("cylon-opencv");
 
-var Adaptor = source("adaptor");
+var Adaptor = lib("adaptor");
 
 var Drivers = {
-  "mat": source("mat"),
-  "camera": source("camera"),
-  "video": source("video"),
-  "window": source("window")
+  mat: lib("mat"),
+  camera: lib("camera"),
+  video: lib("video"),
+  window: lib("window")
 };
 
 describe("cylon-opencv", function() {
