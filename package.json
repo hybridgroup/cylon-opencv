@@ -1,7 +1,6 @@
 {
   "name": "cylon-opencv",
   "version": "0.13.0",
-  "main": "lib/cylon-opencv.js",
   "description": "Cylon module for OpenCV",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-opencv/issues",

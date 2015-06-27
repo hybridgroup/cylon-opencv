@@ -1,6 +1,6 @@
 "use strict";
 
-var opencv = lib("cylon-opencv");
+var opencv = lib("../");
 
 var Adaptor = lib("adaptor");
 
