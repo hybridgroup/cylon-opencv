@@ -1,5 +1,7 @@
 ## Release History
 
+Version 0.14.0 - Use Cylon 1.1.0
+
 Version 0.13.0 - Compatibility with Cylon 1.0.0
 
 Version 0.12.1 - Upd package to use main node-opencv repo now that it supports pre-compiled binaries
