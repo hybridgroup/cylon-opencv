@@ -32,9 +32,10 @@ Cylon.robot({
 
         // display a square in the coordinates for the detected
         // motion.
+        console.log(rect);
         im.rectangle(
           [rect[0], rect[1]],
-          [rect[0] + rect[2], rect[1] + rect[3]],
+          [rect[2], rect[3]],
           [0, 255, 0],
           2
         );
@@ -61,7 +62,7 @@ Cylon.robot({
         my.window.show(im, 40);
       });
 
-      my.camera.readFrame();
+      every(50, my.camera.readFrame);
     });
   }
 }).start();
