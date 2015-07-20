@@ -27,10 +27,11 @@ Cylon.robot({
       // the listener function that we pass.
       // The rect param is an array conaining rect of any motion detected
       // in the frame (im).
-      my.camera.on("motionDetected", function(err, im, rect) {
+      my.camera.on("motionDetected", function(err, im, rect, delta) {
         if (err) { console.log(err); }
 
         console.log("rect:", rect);
+        console.log("delta:", delta);
 
         // draws a rectangle on the image, using the motion tracking coordinates
         // im.rectangle([x, y], [x, y], [r, g, b], stroke-thickness)
@@ -44,10 +45,6 @@ Cylon.robot({
         // Once the image has been updated with rectangles around
         // the faces detected, we display it in our window.
         my.window.show(im, 40);
-
-        // After displaying the updated image, we trigger another
-        // frame read to ensure the fastest processing possible.
-        my.camera.readFrame();
       });
 
       // We listen for frameReady event, when triggered
@@ -56,6 +53,10 @@ Cylon.robot({
       my.camera.on("frameReady", function(err, im) {
         if (err) { console.log(err); }
         my.camera.detectMotion(im, [420, 110, 490, 170]);
+
+        // After displaying the updated image, we trigger another
+        // frame read to ensure the fastest processing possible.
+        my.camera.readFrame();
       });
 
       my.camera.readFrame();
