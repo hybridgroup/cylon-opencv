@@ -159,6 +159,71 @@ describe("Adaptor", function() {
     });
   });
 
+  describe("#detectMotion", function() {
+    var image, start, rect;
+
+    beforeEach(function() {
+      spy(adaptor, "emit");
+      image = {};
+      start = [100, 200, 300, 400];
+
+      rect = [1, 2, 3, 4];
+
+      adaptor.last = [1, 1, 1, 1];
+
+      adaptor.motionTracker = { track: stub().returns(rect) };
+    });
+
+    context("if adaptor.motionTracker isn't set", function() {
+      beforeEach(function() {
+        stub(OpenCV, "TrackedObject").returns({ track: stub() });
+        adaptor.motionTracker = null;
+        adaptor.last = null;
+        adaptor.detectMotion(image, start);
+      });
+
+      afterEach(function() {
+        OpenCV.TrackedObject.restore();
+      });
+
+      it("creates a new TrackedObject with start", function() {
+        expect(OpenCV.TrackedObject).to.be.calledWithNew;
+        expect(OpenCV.TrackedObject).to.be.calledWith(
+          image, start, { channel: "value" }
+        );
+      });
+    });
+
+    context("if there's no last image to compare against", function() {
+      beforeEach(function() {
+        adaptor.last = false;
+      });
+
+      it("doesn't emit an event", function() {
+        adaptor.detectMotion(image, start);
+        expect(adaptor.emit).to.not.be.calledWith("motionDetected");
+      });
+    });
+
+    it("calls motionTracker#track with the new image", function() {
+      adaptor.detectMotion(image, start);
+      expect(adaptor.motionTracker.track).to.be.calledWith(image);
+    });
+
+    it("triggers the event with the image, rect, and delta", function() {
+      adaptor.detectMotion(image, start);
+      expect(adaptor.emit).to.be.calledWith(
+        "motionDetected",
+        null, image, rect, [0, -1, -2, -3]
+      );
+    });
+
+    it("stores the tracked rect in adaptor.last", function() {
+      adaptor.detectMotion(image, start);
+      expect(adaptor.last).to.be.eql(rect);
+    });
+  });
+
   describe("createWindow", function() {
     var mockWindow;
 

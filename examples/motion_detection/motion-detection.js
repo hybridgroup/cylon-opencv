@@ -9,10 +9,7 @@ Cylon.robot({
 
   devices: {
     window: { driver: "window" },
-    camera: {
-      driver: "camera",
-      camera: 0
-    }
+    camera: { driver: "camera", camera: 0 }
   },
 
   work: function(my) {
@@ -22,11 +19,14 @@ Cylon.robot({
     my.camera.once("cameraReady", function() {
       console.log("The camera is ready!");
 
-      // We add a listener for the motionDetected event
-      // here, we will get (err, image/frame, rect) params back in
-      // the listener function that we pass.
-      // The rect param is an array conaining rect of any motion detected
-      // in the frame (im).
+      // here, we add a listener for the `motionDetected` event.
+      //
+      // when motion is detected, we will get passed the following parameters:
+      //
+      // err - any error that occured
+      // im - the current image
+      // rect - an array of rectangle coordinates containing the detected motion
+      // delta - the difference between the previous frame's rect and this one
       my.camera.on("motionDetected", function(err, im, rect, delta) {
         if (err) { console.log(err); }
 
@@ -42,23 +42,23 @@ Cylon.robot({
           2
         );
 
-        // Once the image has been updated with rectangles around
-        // the faces detected, we display it in our window.
+        // once we've updated the image with the motion-detection rectangle,
+        // display it in our window.
         my.window.show(im, 40);
       });
 
-      // We listen for frameReady event, when triggered
-      // we start the motion detection passing the frame
-      // that we just got from the camera feed.
+      // when opencv tells us that a frame has been read with the `frameReady`
+      // event, we start motion detection, passing along the frame we just
+      // received.
       my.camera.on("frameReady", function(err, im) {
         if (err) { console.log(err); }
         my.camera.detectMotion(im, [420, 110, 490, 170]);
 
-        // After displaying the updated image, we trigger another
-        // frame read to ensure the fastest processing possible.
+        // when the frame is ready, request another one.
         my.camera.readFrame();
       });
 
+      // start things off by requesting a frame
       my.camera.readFrame();
     });
   }
