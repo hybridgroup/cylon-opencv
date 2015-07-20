@@ -64,6 +64,37 @@ make
 sudo make install
 ```
 
+### Intel Edison
+
+IMPORTANT NOTE: if you are using the latest Edison firmware then DO NOT run `opkg install kernel-module-uvcvideo` as the UVC drivers are already installed, and it will cause them to stop working!
+
+Follow instructions from [http://alextgalileo.altervista.org/edison-package-repo-configuration-instructions.html](http://alextgalileo.altervista.org/edison-package-repo-configuration-instructions.html) to add the "official unofficial" package repo.
+
+Then run these commands:
+
+```
+opkg install libopencv-core-dev
+opkg install libopencv-calib3d-dev
+opkg install libopencv-contrib-dev
+opkg install libopencv-features2d-dev
+opkg install libopencv-flann-dev
+opkg install libopencv-gpu-dev
+opkg install libopencv-highgui-dev
+opkg install libopencv-imgproc-dev
+opkg install libopencv-legacy-dev
+opkg install libopencv-ml-dev
+opkg install libopencv-nonfree-dev
+opkg install libopencv-objdetect-dev
+opkg install libopencv-ocl-dev
+opkg install libopencv-photo-dev
+opkg install libopencv-stitching-dev
+opkg install libopencv-superres-dev
+opkg install libopencv-video-dev
+opkg install libopencv-videostab-dev
+opkg install opencv-staticdev
+```
+
+
 ## How to Use
 
 Using cylon-opencv is pretty easy, same as any other cylon adaptor making use of the appropiate cylon drivers.
