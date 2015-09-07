@@ -19,3 +19,8 @@ install:
 script:
   - make ci
   - CODECLIMATE_REPO_TOKEN=4491d8f5ab0c54cb98fba95b78bc4fede70d953bf5c420b81f964fd3f85fd9a5 codeclimate-test-reporter < coverage/lcov.info
+
+matrix:
+  allow_failures:
+    # Temporarily allowing iojs to fail
+    - node_js: "iojs"
