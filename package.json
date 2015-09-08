@@ -1,6 +1,6 @@
 {
   "name": "cylon-opencv",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Cylon module for OpenCV",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-opencv/issues",
@@ -24,6 +24,7 @@
     "iot",
     "hardware",
     "opencv",
+    "open cv",
     "vision",
     "computer vision"
   ],
@@ -37,7 +38,7 @@
   },
 
   "dependencies": {
-    "cylon":  "~1.1.0",
+    "cylon":  "~1.2.0",
     "opencv": ">=3.0.0"
   }
 }
