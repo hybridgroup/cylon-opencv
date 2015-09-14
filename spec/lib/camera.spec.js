@@ -98,4 +98,15 @@ describe("Camera", function() {
       expect(detectFaces).to.be.calledWith("frame", "path/to/cascade.xml");
     });
   });
+
+  describe("#detectMotion", function() {
+    beforeEach(function() {
+      camera.connection = { detectMotion: spy() };
+    });
+
+    it("tells the connection to detect motion", function() {
+      camera.detectMotion("frame", "rect");
+      expect(camera.connection.detectMotion).to.be.calledWith("frame", "rect");
+    });
+  });
 });
